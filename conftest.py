@@ -18,6 +18,8 @@ web_pass = os.getenv("WEB_PASS")
 web_url = os.getenv("WEB_URL")
 swagger_url = os.getenv("SWAGGER_URL")
 id_company = os.getenv("ID_COMPANY")
+id_card = os.getenv("ID_CARD")
+id_contract = os.getenv("ID_CONTRACT")
 
 def pytest_addoption(parser):
     parser.addoption("--browser_version", default="128.0")

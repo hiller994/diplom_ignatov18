@@ -1,11 +1,15 @@
-import time
+"""
+- АВТОРИЗАЦИЯ API
+- ШАГИ СОЗДАНИЯ И СОХРАЕНИЯ API
+- ПРОВЕРКА WEB
+- УДАЛЕНИЕ API
+"""
 
 import allure
 import requests
-from selene import browser, have, be
+from selene import browser, have
 
 from conftest import swagger_url, id_company
-from utils import attach
 
 
 def test_create_driver():
