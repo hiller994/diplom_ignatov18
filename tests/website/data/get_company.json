@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "short_name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "inn": {
+          "type": "string"
+        },
+        "kpp": {
+          "type": "string"
+        },
+        "external_id": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "short_name",
+        "address",
+        "inn",
+        "kpp",
+        "external_id"
+      ]
+    }
+  ]
+}

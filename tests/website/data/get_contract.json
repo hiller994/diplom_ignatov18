@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "company": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "inn": {
+          "type": "string"
+        },
+        "kpp": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "address",
+        "inn",
+        "kpp"
+      ]
+    },
+    "number": {
+      "type": "string"
+    },
+    "is_active": {
+      "type": "boolean"
+    },
+    "balance": {
+      "type": "number"
+    },
+    "credit": {
+      "type": "number"
+    },
+    "forecast_days": {
+      "type": "null"
+    },
+    "cards_count": {
+      "type": "integer"
+    },
+    "open_date": {
+      "type": "string"
+    },
+    "close_date": {
+      "type": "null"
+    },
+    "branch": {
+      "type": "string"
+    },
+    "payment": {
+      "type": "string"
+    },
+    "country": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "title"
+      ]
+    },
+    "uin": {
+      "type": "null"
+    }
+  },
+  "required": [
+    "id",
+    "company",
+    "number",
+    "is_active",
+    "balance",
+    "credit",
+    "forecast_days",
+    "cards_count",
+    "open_date",
+    "close_date",
+    "branch",
+    "payment",
+    "country",
+    "uin"
+  ]
+}

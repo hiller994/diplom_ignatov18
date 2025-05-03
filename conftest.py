@@ -27,7 +27,7 @@ def pytest_addoption(parser):
 
 
 
-@pytest.fixture(scope='function', autouse=True)
+@pytest.fixture(scope='function')
 def auth():
     with allure.step("Получение токена"):
         result_token = requests.post(url=swagger_url + 'auth/login',

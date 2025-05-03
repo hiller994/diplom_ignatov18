@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "format": {
+      "type": "string"
+    },
+    "date_from": {
+      "type": "string"
+    },
+    "date_to": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "report_type_id": {
+      "type": "integer"
+    },
+    "contract_id": {
+      "type": "string"
+    },
+    "contract_number": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "format",
+    "date_from",
+    "date_to",
+    "id",
+    "status",
+    "created_at",
+    "report_type_id",
+    "contract_id",
+    "contract_number"
+  ]
+}
