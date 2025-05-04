@@ -1,10 +1,8 @@
-import time
-
 import allure
 import requests
 from selene import browser, have, be
 
-from conftest import swagger_url, id_company, id_card
+from tests.website.conftest import swagger_url, id_card
 
 
 def test_create_card_limit():

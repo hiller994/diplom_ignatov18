@@ -1,15 +1,8 @@
-import json
 import os
-from datetime import datetime, date, timedelta
 
 import pytest
 import requests
-from selene import browser
-from jsonschema import validate
-from conftest import swagger_url
-from tests.website.data.file_path import path
-from datetime import datetime, timedelta
-import random
+from tests.website.conftest import swagger_url
 
 web_login = os.getenv("WEB_LOGIN")
 web_pass = os.getenv("WEB_PASS")

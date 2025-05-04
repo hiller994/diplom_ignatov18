@@ -2,9 +2,9 @@ import time
 
 import allure
 import requests
-from selene import browser, have, be
+from selene import browser, have
 
-from conftest import swagger_url, id_contract
+from tests.website.conftest import swagger_url, id_contract
 
 
 def test_add_card_in_group():

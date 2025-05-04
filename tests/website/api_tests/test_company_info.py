@@ -3,9 +3,8 @@ import os
 
 import pytest
 import requests
-from selene import browser
 from jsonschema import validate
-from conftest import swagger_url
+from tests.website.conftest import swagger_url
 from tests.website.data.file_path import path
 
 web_login = os.getenv("WEB_LOGIN")

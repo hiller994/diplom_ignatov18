@@ -6,6 +6,12 @@ def add_screenshot(browser):
     png = browser.driver.get_screenshot_as_png()
     allure.attach(body=png, name='screenshot', attachment_type=AttachmentType.PNG, extension='.png')
 
+def attach_screenshot(browser):
+    allure.attach(
+        browser.driver.get_screenshot_as_png(),
+        name='screenshot',
+        attachment_type=allure.attachment_type.PNG
+    )
 
 def add_logs(browser):
     log = "".join(f'{text}\n' for text in browser.driver.get_log(log_type='browser')) # достаем логи из драйвера, вытягивает из console(бразуер)

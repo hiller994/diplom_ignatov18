@@ -4,3 +4,6 @@ allure-pytest>=2.13.3
 python-dotenv>=1.0.1
 requests
 jsonschema
+appium-python-client
+pydantic-settings
+python-dotenv
