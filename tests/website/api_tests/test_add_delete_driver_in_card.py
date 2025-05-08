@@ -9,7 +9,7 @@ web_pass = os.getenv("WEB_PASS")
 id_contract = os.getenv("ID_CONTRACT")
 id_company = os.getenv("ID_COMPANY")
 id_card = os.getenv("ID_CARD")
-id_driver = os.getenv("DRIVER_FOR_CARD")
+id_driver = os.getenv("ID_DRIVER_FOR_CARD")
 
 @pytest.fixture(scope='function')
 def post_authorization():

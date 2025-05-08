@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.options import Options
 from utils import attach
 from dotenv import load_dotenv
 import os
-load_dotenv() # Загружаем переменные из .env помогло
+load_dotenv() # Загружаем переменные из .env
 
 DEFAULT_BROWSER_VERSION = "128.0"
 
@@ -23,8 +23,6 @@ id_contract = os.getenv("ID_CONTRACT")
 
 def pytest_addoption(parser):
     parser.addoption("--browser_version", default="128.0")
-
-
 
 
 @pytest.fixture(scope='function')
@@ -81,10 +79,10 @@ def load_env():
 
 @pytest.fixture(scope="function", autouse=True)
 def setup_browser(request):
-    browser_version = request.config.getoption("--browser_version")
-    browser_version = (
-        browser_version if browser_version != "" else DEFAULT_BROWSER_VERSION
-    )
+    #browser_version = request.config.getoption("--browser_version")
+    #browser_version = (
+    #    browser_version if browser_version != "" else DEFAULT_BROWSER_VERSION
+    #)
     browser.config.base_url = web_url
 
     driver_options = webdriver.ChromeOptions()
@@ -97,13 +95,14 @@ def setup_browser(request):
     options = Options()
     selenoid_capabilities = {
         "browserName": "chrome",
-        "browserVersion": browser_version,
-        "selenoid:options": {"enableVNC": True, "enableVideo": True},
+        "browserVersion": "", #browser_version,
+        "selenoid:options": {"enableVideo": True}
     }
 
-    options.capabilities.update(selenoid_capabilities)
+    #options.capabilities.update(selenoid_capabilities)
     #browser.config.driver = webdriver.Remote(
-    #    command_executor=f"https://{selenoid_login}:{selenoid_pass}@selenoid.autotests.cloud/wd/hub",
+        #command_executor=f"https://{selenoid_login}:{selenoid_pass}@selenoid.autotests.cloud/wd/hub",
+    #    command_executor="http://10.240.25.54:4444/wd/hub",
     #    options=options,
     #)
 

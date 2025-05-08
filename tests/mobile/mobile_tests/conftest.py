@@ -1,10 +1,20 @@
+from pathlib import Path
+
 import pytest
 from appium.options.android import UiAutomator2Options
+from dotenv import load_dotenv
 from selene import browser, Config
 import os
 
 from utils.attach import attach_screenshot
 
+
+# Путь к .env.mobile относительно conftest.py
+env_path = Path(__file__).parent.parent.parent.parent / ".env.mobile"
+load_dotenv(env_path)
+
+#appium_url = os.getenv("MOBILE_URL")
+#apk_name = os.getenv("APP")
 
 
 @pytest.fixture(scope='function')
@@ -14,7 +24,7 @@ def mobile_management():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     apk_path = os.path.abspath(os.path.join(
         current_dir,
-        "../../../tests/mobile/mobile_tests/***.apk"
+        f"../../../tests/mobile/mobile_tests/{os.getenv("APP")}"
     ))
 
     # Проверяем существование файла
@@ -29,15 +39,15 @@ def mobile_management():
         "appium:udid": "emulator-5554",
         "appium:ignoreHiddenApiPolicyError": True,
         "appium:enforceAppInstall": False,
-        #"appium:noReset": True
         "appium:fullReset": False,
-        "noReset": True # Не сбрасывать данные приложения
+        "appium:noReset": True # Не сбрасывать данные приложения
+        #"appium:autoGrantPermission": True
 })
 
     #browser.config.driver = webdriver.Remote(
     #    command_executor='http://127.0.0.1:4723',
     #   options=options
-    browser.config.driver_remote_url = "http://127.0.0.1:4723"
+    browser.config.driver_remote_url = os.getenv("MOBILE_URL")
     browser.config.driver_options = options
 
 

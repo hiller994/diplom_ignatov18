@@ -1,8 +1,8 @@
-import allure
-from selene import browser, have
+from tests.models.pages.page_userinfo import UserinfoPage
 
+def test_auth(auth):
+    page_lk = UserinfoPage()
 
-def test_auth():
-    with allure.step("Проверка авторизации"):
-        browser.open("home")
-        assert browser.element('[class="flex company"]').should(have.text('ООО Март'))
+    page_lk.open_page()
+    page_lk.request_userinfo()
+    page_lk.should_data()
