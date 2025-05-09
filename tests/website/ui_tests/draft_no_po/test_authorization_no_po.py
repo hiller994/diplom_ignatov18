@@ -1,8 +1,8 @@
 import allure
 import requests
-from selene import browser, have, be
+from selene import browser, have
 
-from tests.website.conftest import swagger_url
+from tests.website.ui_tests.conftest import swagger_url
 
 
 def test_auth(auth):

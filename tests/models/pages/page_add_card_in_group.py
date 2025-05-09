@@ -4,7 +4,7 @@ import allure
 import requests
 from selene import browser, have
 
-from tests.website.conftest import swagger_url, id_contract
+from tests.website.ui_tests.conftest import swagger_url, id_contract
 
 class AddcardgroupPage:
     #Сделал id_group и auth_data атрибутами класса, чтобы они были доступны во всех методах

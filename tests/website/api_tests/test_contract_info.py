@@ -1,43 +1,31 @@
 import json
-import os
 
-import pytest
+import allure
 import requests
 from jsonschema import validate
-from tests.website.conftest import swagger_url
+from tests.website.api_tests.conftest import swagger_url, id_card, id_company, id_driver, id_contract
+from tests.website.data.attach_logging_api import attach_logging
 from tests.website.data.file_path import path
 
-web_login = os.getenv("WEB_LOGIN")
-web_pass = os.getenv("WEB_PASS")
-id_contract = os.getenv("ID_CONTRACT")
 
-@pytest.fixture(scope='function')
-def post_authorization():
-    request_post_authorization = requests.post(url=swagger_url + 'auth/login',
-                                               json=
-                                               {
-                                                   "username": web_login,
-                                                   "password": web_pass
-                                               })
-    responce_post_authorization = request_post_authorization.json()
-    #print(responce_post_authorization)
-    auth_token = responce_post_authorization['access_token']
-    #print(auth_token)
-    return auth_token
+def test_get_contract_info(auth):
+    with allure.step('Отправка запроса'):
+        get_contract_info = requests.get(url=swagger_url + f'contracts/{id_contract}',
+                                           headers=
+                                           {
+                                               "Authorization": f"Bearer {auth}",
+                                               "Content-Type": "application/json"
+                                           })
+        responce_contract_info = get_contract_info.json()
+        #print(responce_contract_info)
 
+    with allure.step('Проверка статус-кода'):
+        assert get_contract_info.status_code == 200
 
-def test_get_contract_info(post_authorization):
-    get_contract_info = requests.get(url=swagger_url + f'contracts/{id_contract}',
-                                       headers=
-                                       {
-                                           "Authorization": f"Bearer {post_authorization}",
-                                           "Content-Type": "application/json"
-                                       })
-    responce_contract_info = get_contract_info.json()
-    print(responce_contract_info)
+    with allure.step('Проверка схемы json'):
+        schema_path = path("get_contract.json")
+        with open(schema_path) as file:
+            validate(responce_contract_info, schema=json.loads(file.read()))
 
-    assert get_contract_info.status_code == 200
-
-    schema_path = path("get_contract.json")
-    with open(schema_path) as file:
-        validate(responce_contract_info, schema=json.loads(file.read()))
+    with allure.step('Сбор логов'):
+        attach_logging(get_contract_info)

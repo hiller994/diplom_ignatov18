@@ -2,7 +2,7 @@ import allure
 import requests
 from selene import browser, have
 
-from tests.website.conftest import swagger_url, id_company
+from tests.website.ui_tests.conftest import swagger_url, id_company
 
 class DriverPage:
     @allure.step('Открытие формы создания водителя')

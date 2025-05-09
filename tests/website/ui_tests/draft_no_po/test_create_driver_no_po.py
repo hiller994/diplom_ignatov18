@@ -2,7 +2,7 @@ import allure
 import requests
 from selene import browser, have
 
-from tests.website.conftest import id_company, swagger_url
+from tests.website.ui_tests.conftest import id_company, swagger_url
 
 
 def test_create_driver():

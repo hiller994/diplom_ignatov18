@@ -4,7 +4,7 @@ import allure
 import requests
 from selene import browser, have
 
-from tests.website.conftest import swagger_url, id_contract
+from tests.website.ui_tests.conftest import swagger_url, id_contract
 
 
 def test_add_card_in_group():

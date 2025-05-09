@@ -9,7 +9,14 @@ from selenium.webdriver.chrome.options import Options
 from utils import attach
 from dotenv import load_dotenv
 import os
-load_dotenv() # Загружаем переменные из .env
+#from project_root import get_project_root #библиотека для удобного поиска, чтобы при указани .env не писать parent.parent.parent.
+
+load_dotenv()
+
+#@pytest.fixture(scope="session", autouse=True)
+#def load_env():
+#   load_dotenv()
+
 
 DEFAULT_BROWSER_VERSION = "128.0"
 
@@ -20,6 +27,7 @@ swagger_url = os.getenv("SWAGGER_URL")
 id_company = os.getenv("ID_COMPANY")
 id_card = os.getenv("ID_CARD")
 id_contract = os.getenv("ID_CONTRACT")
+id_driver = os.getenv("ID_DRIVER_FOR_CARD")
 
 def pytest_addoption(parser):
     parser.addoption("--browser_version", default="128.0")
@@ -68,13 +76,6 @@ def auth():
                          ''')
 
         browser.open(web_url)  # обновляем страницу
-
-
-
-
-@pytest.fixture(scope="session", autouse=True)
-def load_env():
-    load_dotenv()
 
 
 @pytest.fixture(scope="function", autouse=True)

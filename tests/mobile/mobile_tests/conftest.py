@@ -13,6 +13,8 @@ from utils.attach import attach_screenshot
 env_path = Path(__file__).parent.parent.parent.parent / ".env.mobile"
 load_dotenv(env_path)
 
+load_dotenv() # Загружаем переменные из .env
+
 #appium_url = os.getenv("MOBILE_URL")
 #apk_name = os.getenv("APP")
 
@@ -28,8 +30,8 @@ def mobile_management():
     ))
 
     # Проверяем существование файла
-    if not os.path.exists(apk_path):
-        pytest.fail(f"APK file not found at: {apk_path}")
+    #if not os.path.exists(apk_path):
+    #    pytest.fail(f"APK file not found at: {apk_path}")
 
     options = UiAutomator2Options().load_capabilities({
         "platformName": "Android",

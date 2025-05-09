@@ -1,12 +1,4 @@
-import time
-
-import allure
-import requests
-from selene import browser, have
-
 from tests.models.pages.page_add_card_in_group import AddcardgroupPage
-from tests.website.conftest import swagger_url, id_contract
-
 
 def test_add_card_in_group(auth):
     page_group = AddcardgroupPage()

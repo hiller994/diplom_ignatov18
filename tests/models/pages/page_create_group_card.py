@@ -1,8 +1,8 @@
 import allure
 import requests
-from selene import browser, have, be
+from selene import browser, be
 
-from tests.website.conftest import swagger_url, id_contract
+from tests.website.ui_tests.conftest import swagger_url, id_contract
 
 
 class GroupcardPage:

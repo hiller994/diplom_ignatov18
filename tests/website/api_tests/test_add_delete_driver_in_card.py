@@ -1,59 +1,44 @@
-import os
-
-import pytest
+import allure
 import requests
-from tests.website.conftest import swagger_url
 
-web_login = os.getenv("WEB_LOGIN")
-web_pass = os.getenv("WEB_PASS")
-id_contract = os.getenv("ID_CONTRACT")
-id_company = os.getenv("ID_COMPANY")
-id_card = os.getenv("ID_CARD")
-id_driver = os.getenv("ID_DRIVER_FOR_CARD")
-
-@pytest.fixture(scope='function')
-def post_authorization():
-    request_post_authorization = requests.post(url=swagger_url + 'auth/login',
-                                               json=
-                                               {
-                                                   "username": web_login,
-                                                   "password": web_pass
-                                               })
-    responce_post_authorization = request_post_authorization.json()
-    #print(responce_post_authorization)
-    auth_token = responce_post_authorization['access_token']
-    #print(auth_token)
-    return auth_token
+from tests.website.api_tests.conftest import swagger_url, id_card, id_company, id_driver
+from tests.website.data.attach_logging_api import attach_logging
 
 
-def test_delete_driver_card(post_authorization):
+def test_delete_driver_card(auth):
     #сначала привязываем водителя
-    post_add_driver_card = requests.patch(url=swagger_url + f'companies/{id_company}/drivers/{id_driver}/cards/',
-                                       headers=
-                                       {
-                                           "Authorization": f"Bearer {post_authorization}",
-                                           "Content-Type": "application/json"
-                                       },
-                                      json=
-                                         {
-                                             "card_ids": [
-                                                 id_card
-                                             ]
-                                         }
-                                      )
-    responce_add_driver_card = post_add_driver_card.json()
-    print(responce_add_driver_card)
+    with allure.step("Привязка водителя к топливной карте (перед удалением)"):
+        post_add_driver_card = requests.patch(url=swagger_url + f'companies/{id_company}/drivers/{id_driver}/cards/',
+                                           headers=
+                                           {
+                                               "Authorization": f"Bearer {auth}",
+                                               "Content-Type": "application/json"
+                                           },
+                                          json=
+                                             {
+                                                 "card_ids": [
+                                                     id_card
+                                                 ]
+                                             }
+                                          )
+        responce_add_driver_card = post_add_driver_card.json()
 
-    assert post_add_driver_card.status_code == 200
+        with allure.step('Проверка статус-кода привязки'):
+            assert post_add_driver_card.status_code == 200
 
-    # потом отвязываем водителя
-    post_delete_driver_card = requests.delete(url=swagger_url + f'companies/{id_company}/drivers/{id_driver}/cards/{id_card}/',
-                                              headers=
-                                              {
-                                                  "Authorization": f"Bearer {post_authorization}",
-                                                  "Content-Type": "application/json"
-                                              })
-    responce_delete_driver_card = post_delete_driver_card.json()
-    print(responce_delete_driver_card)
+    with allure.step("Отвязка водителя от топливной карты"):
+        # потом отвязываем водителя
+        post_delete_driver_card = requests.delete(url=swagger_url + f'companies/{id_company}/drivers/{id_driver}/cards/{id_card}/',
+                                                  headers=
+                                                  {
+                                                      "Authorization": f"Bearer {auth}",
+                                                      "Content-Type": "application/json"
+                                                  })
+        responce_delete_driver_card = post_delete_driver_card.json()
 
-    assert post_delete_driver_card.status_code == 200
+        with allure.step('Проверка статус-кода отвязки'):
+            assert post_delete_driver_card.status_code == 200
+
+    with allure.step("Сбор логов"):
+        attach_logging(post_add_driver_card)
+        attach_logging(post_delete_driver_card)
