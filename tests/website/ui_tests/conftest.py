@@ -117,3 +117,36 @@ def setup_browser(request):
     attach.add_logs(browser)
     attach.add_video(browser)
     browser.quit()
+
+    '''
+    Генерирует отчет из allure-results.
+
+    Отправляет его на указанный Allure Server.
+    
+    
+    import subprocess
+
+def pytest_sessionfinish(session, exitstatus):
+    """Отправка Allure-отчета на сервер после выполнения тестов."""
+    allure_results_dir = "tests/website/ui_tests/allure-results"
+    allure_report_dir = "tests/website/ui_tests/allure-report"
+    allure_server_url = "http://10.000.00.00:8888"  #
+
+    # Генерация отчета
+    subprocess.run([
+        "allure", "generate", 
+        allure_results_dir, 
+        "-o", allure_report_dir, 
+        "--clean"
+    ], check=True)
+
+    # Отправка на Allure Server
+    subprocess.run([
+        "allure", "send", "results",
+        allure_results_dir,
+        "--url", allure_server_url
+    ], check=True)
+
+    print(f"\nAllure-отчет отправлен на сервер: {allure_server_url}")
+    
+    '''
