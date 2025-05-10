@@ -1,6 +1,11 @@
+import os
+
 import allure
 from allure_commons.types import AttachmentType
+from dotenv import load_dotenv
 
+load_dotenv()
+selenoid_url = os.getenv("SELENOID_URL")
 
 def add_screenshot(browser):
     png = browser.driver.get_screenshot_as_png()
@@ -24,7 +29,8 @@ def add_html(browser):
 
 
 def add_video(browser):
-    video_url = "http://10.240.25.54:8080/videos" + browser.driver.session_id + ".mp4" #ссылка на сам файл. формируется при каждом запуске теста
+    #video_url = "http://00.000.00.00:0000/videos" + browser.driver.session_id + ".mp4" #ссылка на сам файл. формируется при каждом запуске теста
+    video_url = selenoid_url + "videos" + browser.driver.session_id + ".mp4"  # ссылка на сам файл. формируется при каждом запуске теста
     html = "<html><body><video width='100%' height='100%' controls autoplay><source src='" \
            + video_url \
            + "' type='video/mp4'></video></body></html>" #плеер HTML

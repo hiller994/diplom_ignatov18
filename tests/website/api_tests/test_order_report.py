@@ -3,10 +3,10 @@ import json
 import allure
 import requests
 from jsonschema import validate
-from tests.website.api_tests.conftest import swagger_url, id_card, id_company, id_driver, id_contract
-from tests.website.data.file_path import path
-from tests.website.data.geterate_date import generate_date
-from tests.website.data.attach_logging_api import attach_logging
+from tests.website.api_tests.conftest import swagger_url, id_company, id_contract
+from utils.file_path import path
+from utils.geterate_date import generate_date
+from utils.attach_logging_api import attach_logging
 
 
 

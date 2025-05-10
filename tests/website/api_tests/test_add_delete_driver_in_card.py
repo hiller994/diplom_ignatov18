@@ -2,7 +2,7 @@ import allure
 import requests
 
 from tests.website.api_tests.conftest import swagger_url, id_card, id_company, id_driver
-from tests.website.data.attach_logging_api import attach_logging
+from utils.attach_logging_api import attach_logging
 
 
 def test_delete_driver_card(auth):

@@ -4,8 +4,8 @@ import allure
 import requests
 from jsonschema import validate
 from tests.website.api_tests.conftest import swagger_url
-from tests.website.data.attach_logging_api import attach_logging
-from tests.website.data.file_path import path
+from utils.attach_logging_api import attach_logging
+from utils.file_path import path
 
 
 def test_get_company_info(auth):

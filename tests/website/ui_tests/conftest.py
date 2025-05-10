@@ -18,7 +18,7 @@ load_dotenv()
 #   load_dotenv()
 
 
-DEFAULT_BROWSER_VERSION = "128.0"
+#DEFAULT_BROWSER_VERSION = "128.0"
 
 web_login = os.getenv("WEB_LOGIN")
 web_pass = os.getenv("WEB_PASS")
@@ -28,9 +28,10 @@ id_company = os.getenv("ID_COMPANY")
 id_card = os.getenv("ID_CARD")
 id_contract = os.getenv("ID_CONTRACT")
 id_driver = os.getenv("ID_DRIVER_FOR_CARD")
+selenoid_url = os.getenv("SELENOID_URL")
 
-def pytest_addoption(parser):
-    parser.addoption("--browser_version", default="128.0")
+#def pytest_addoption(parser):
+#    parser.addoption("--browser_version", default="128.0")
 
 
 @pytest.fixture(scope='function')
@@ -95,21 +96,24 @@ def setup_browser(request):
 
     options = Options()
     selenoid_capabilities = {
-        "browserName": "chrome",
-        "browserVersion": "", #browser_version,
-        "selenoid:options": {"enableVideo": True}
+    "browserName": "chrome",
+    "browserVersion": "128.0",
+    "selenoid:options": {
+        "enableVideo": False
     }
+}
 
-    #options.capabilities.update(selenoid_capabilities)
-    #browser.config.driver = webdriver.Remote(
+    options.capabilities.update(selenoid_capabilities)
+    driver = webdriver.Remote(
         #command_executor=f"https://{selenoid_login}:{selenoid_pass}@selenoid.autotests.cloud/wd/hub",
-    #    command_executor="http://10.240.25.54:4444/wd/hub",
-    #    options=options,
-    #)
+        command_executor=selenoid_url + 'wd/hub',
+        options=options,
+    )
+    browser.config.driver = driver
 
     yield
     attach.add_html(browser)
     attach.add_screenshot(browser)
     attach.add_logs(browser)
-    #attach.add_video(browser)
+    attach.add_video(browser)
     browser.quit()
