@@ -1,3 +1,5 @@
+import os
+
 import allure
 import requests
 from selene import browser, have

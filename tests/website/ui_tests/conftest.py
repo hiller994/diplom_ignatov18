@@ -103,13 +103,13 @@ def setup_browser(request):
     }
 }
 
-    options.capabilities.update(selenoid_capabilities)
-    driver = webdriver.Remote(
-        #command_executor=f"https://{selenoid_login}:{selenoid_pass}@selenoid.autotests.cloud/wd/hub",
-        command_executor=selenoid_url + 'wd/hub',
-        options=options,
-    )
-    browser.config.driver = driver
+    #options.capabilities.update(selenoid_capabilities)
+    #driver = webdriver.Remote(
+    #    #command_executor=f"https://{selenoid_login}:{selenoid_pass}@selenoid.autotests.cloud/wd/hub",
+    #    command_executor=selenoid_url + 'wd/hub',
+    #    options=options,
+    #)
+    #browser.config.driver = driver
 
     yield
     attach.add_html(browser)
