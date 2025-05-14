@@ -118,7 +118,7 @@ def setup_browser(request):
     attach.add_screenshot(browser)
     attach.add_logs(browser)
     attach.add_video(browser)
-    post_allure_server_results()
+    post_allure_server_results() # отправка отчета на сервер
     browser.quit()
 
     '''

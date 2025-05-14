@@ -38,12 +38,12 @@ def post_allure_server_results():
 
     # Чистка истории (удаление старых результатов)
     response_clean_history = session.get(
-        url= allure_url_swagger + '/clean-history?project_id=b2b-lk-ui'
+        url= allure_url_swagger + f'/clean-history?project_id={id_project}'
     )
 
     # Чистка результатов (удаление старых результатов)
     response_clean_results = session.get(
-        url=allure_url_swagger + '/clean-results?project_id=b2b-lk-ui'
+        url=allure_url_swagger + f'/clean-results?project_id={id_project}'
     )
 
 
@@ -75,7 +75,7 @@ def post_allure_server_results():
         response_post = session.post(
             url=allure_url_swagger + '/send-results',
             params={
-                "project_id": "b2b-lk-ui",
+                "project_id": id_project,
                 "force_project_creation": "false"
             },
             headers={
@@ -98,16 +98,16 @@ def post_allure_server_results():
     )
 
 
-    #print("Responce clean history: ", response_clean_history.text)
-    #print("Responce clean results: ", response_clean_results.text)
+    print("Responce clean history: ", response_clean_history.text)
+    print("Responce clean results: ", response_clean_results.text)
 
     print("Status code login:", response_login.status_code)
     print("Status code clean history: ", response_clean_history.status_code)
     print("Status code clean results: ", response_clean_results.status_code)
     print("Status code post file:", response_post.status_code)
     print("Status code generate report:", response_generate_report.status_code)
-    #print("Response post file:", response_post.text)
-    #print("Responce generate: ", response_generate_report.text)
+    print("Response post file:", response_post.text)
+    print("Responce generate: ", response_generate_report.text)
 
     '''
     # Путь к файлу с результатами
