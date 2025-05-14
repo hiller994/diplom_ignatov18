@@ -13,21 +13,22 @@ allure_login = os.getenv('ALLURE_LOGIN')
 allure_pass = os.getenv('ALLURE_PASS')
 allure_url_web = os.getenv('ALLURE_URL_WEB')
 allure_url_swagger = os.getenv('ALLURE_URL_SWAGGER')
+id_project = os.getenv('ALLURE_ID_PROJECT')
 
-print('login:', allure_login)
-print('pass:', allure_pass)
+#print('login:', allure_login)
+#print('pass:', allure_pass)
 
 
-def test_post_allure_server_results():
-    # Сначала выполняем логин и создаём сессию
+def post_allure_server_results():
+    #создаём сессию
     session = requests.Session()
 
     # Логинимся
     response_login = session.post(
         url=allure_url_swagger + '/login',
         json={
-            "username": os.getenv('ALLURE_LOGIN'),
-            "password": os.getenv('ALLURE_PASS')
+            "username": allure_login,
+            "password": allure_pass
         }
     )
 
@@ -35,23 +36,46 @@ def test_post_allure_server_results():
     if response_login.status_code != 200:
         raise Exception(f"Login failed: {response_login.text}")
 
-    # Путь к файлу с результатами
-    file_path = "C:/diplom_ignatov18/tests/website/ui_tests/allure-results/e14cc012-ffe8-4e69-ab26-af23b8aa34b8-result.json"
+    # Чистка истории (удаление старых результатов)
+    response_clean_history = session.get(
+        url= allure_url_swagger + '/clean-history?project_id=b2b-lk-ui'
+    )
 
-    # Открываем файл в бинарном режиме УЖЕ ПОСЛЕ создания сессии
-    with open(file_path, 'rb') as f:
-        files = {
-            'files[]': (
-                '231580e4-f716-4858-96ce-c3ed64484df5-result.json',  # Должно совпадать с реальным именем файла
-                f,  # Передаём файловый объект, а не f.read()
-                'application/json'
+    # Чистка результатов (удаление старых результатов)
+    response_clean_results = session.get(
+        url=allure_url_swagger + '/clean-results?project_id=b2b-lk-ui'
+    )
+
+
+    # ---------------------- Подготовка файлов
+    current_dir = Path(__file__).parent
+    results_dir = current_dir.parent.parent / "website" / "ui_tests" / "allure-results"
+    #results_dir = "C:/diplom_ignatov18/tests/website/ui_tests/allure-results"
+    all_files = [
+        os.path.join(results_dir, f)
+        for f in os.listdir(results_dir)
+        if os.path.isfile(os.path.join(results_dir, f))
+    ]
+
+    if not all_files:
+        raise Exception("No files found in allure-results directory")
+
+    # ---------------------- Отправка всех файлов
+    files = []
+    file_handles = []  # Храним открытые файловые дескрипторы
+
+    try:
+        for file_path in all_files:
+            f = open(file_path, 'rb')
+            file_handles.append(f)
+            files.append(
+                ('files[]', (os.path.basename(file_path), f, 'application/json'))
             )
-        }
 
-        response_post_file = session.post(
-            url=allure_url_swagger +  '/send-results',
+        response_post = session.post(
+            url=allure_url_swagger + '/send-results',
             params={
-                "project_id": 'b2b-lk-ui',
+                "project_id": "b2b-lk-ui",
                 "force_project_creation": "false"
             },
             headers={
@@ -61,68 +85,41 @@ def test_post_allure_server_results():
             files=files
         )
 
-    print("Status code:", response_post_file.status_code)
-    print("Response:", response_post_file.text)
+        #print(f"Send results status: {response_post.status_code}")
+        #print("Response:", response_post.text)
+
+    finally:
+        # Закрываем все файлы после отправки
+        for f in file_handles:
+            f.close()
+
+    response_generate_report = session.get(
+        url=allure_url_swagger + '/generate-report?project_id=b2b-lk-ui&execution_name=Allure%20Docker%20Service%20UI'
+    )
 
 
+    #print("Responce clean history: ", response_clean_history.text)
+    #print("Responce clean results: ", response_clean_results.text)
 
+    print("Status code login:", response_login.status_code)
+    print("Status code clean history: ", response_clean_history.status_code)
+    print("Status code clean results: ", response_clean_results.status_code)
+    print("Status code post file:", response_post.status_code)
+    print("Status code generate report:", response_generate_report.status_code)
+    #print("Response post file:", response_post.text)
+    #print("Responce generate: ", response_generate_report.text)
 
+    '''
+    # Путь к файлу с результатами
+    file_path = "C:/diplom_ignatov18/tests/website/ui_tests/allure-results/f915de91-790d-4f54-bea4-9ac2dc092956-result.json"
 
-
-
-
-
-'''
-session = requests.Session()
-response_login = requests.post(
-    url='http://10.240.25.54:5050/allure-docker-service/login',
-    json={
-        "username": "admin",
-        "password": "7B05BD6AEE"
-    }
-
-)
-# Проверка успешного входа
-if response_login.status_code != 200:
-    raise Exception(f"Login failed: {response_login.text}")
-
-# Куки будут автоматически сохранены в сессии
-
-session.cookies.update(response_login.cookies)
-
-
-
-
-# Путь к файлу с результатами
-file_path = "C:/diplom_ignatov18/tests/website/ui_tests/allure-results/231580e4-f716-4858-96ce-c3ed64484df5-result.json"
-
-# Открываем файл в бинарном режиме
-with open(file_path, 'rb') as f:
-    files = {
-        'files[]': (  # Ключ должен соответствовать ожидаемому сервером
-            '32ccb214-852d-434a-8d4c-7bcf8edcbc4f-result.json',  # Имя файла
-            f.read(),  # Содержимое файла
-            'application/json'  # MIME-тип
-        )
-    }
-
-
-
-
-response_post_file = session.post(
-    url=f'http://10.240.25.54:5050/allure-docker-service/send-results',
-    params= {
-        "project_id": 'b2b-lk-ui',
-        "force_project_creation": "false"
-    },
-    headers={
-        "X-CSRF-TOKEN": session.cookies.get("csrf_access_token", ""),
-        "Content-Type": "multipart/form-data",
-        "accept": "*/*"
-    },
-    files=files
-)
-
-print("Status code:",response_post_file.status_code)
-print("Response:",response_post_file.text)
-'''
+    # Открываем файл в бинарном режиме УЖЕ ПОСЛЕ создания сессии
+    with open(file_path, 'rb') as f:
+        files = {
+            'files[]': (
+                'f915de91-790d-4f54-bea4-9ac2dc092956-result.json',  # Должно совпадать с реальным именем файла
+                f,  # Передаём файловый объект, а не f.read()
+                'application/json'
+            )
+        }
+    '''
