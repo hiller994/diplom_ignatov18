@@ -8,6 +8,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 from tests.website.ui_tests.allure_server import post_allure_server_results
+from tests.website.ui_tests.allure_server_client import AllureServerClient
+#from tests.website.ui_tests.allure_server import post_allure_server_results
 from utils import attach
 from dotenv import load_dotenv
 import os
@@ -18,7 +20,6 @@ load_dotenv()
 #@pytest.fixture(scope="session", autouse=True)
 #def load_env():
 #   load_dotenv()
-
 
 #DEFAULT_BROWSER_VERSION = "128.0"
 
@@ -119,6 +120,12 @@ def setup_browser(request):
     attach.add_logs(browser)
     attach.add_video(browser)
     post_allure_server_results() # отправка отчета на сервер
+
+
+    #client = AllureServerClient()
+    #client.send_results()
+    #client.generate_report()
+
     browser.quit()
 
     '''
