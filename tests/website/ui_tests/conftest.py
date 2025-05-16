@@ -8,7 +8,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 from tests.website.ui_tests.allure_server import post_allure_server_results
-from tests.website.ui_tests.allure_server_client import AllureServerClient
 #from tests.website.ui_tests.allure_server import post_allure_server_results
 from utils import attach
 from dotenv import load_dotenv

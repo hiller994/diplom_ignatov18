@@ -6,14 +6,15 @@ from dotenv import load_dotenv
 from selene import browser, Config
 import os
 
+from path_env import ROOT
 from utils.attach import attach_screenshot
 
 
 # Путь к .env.mobile относительно conftest.py
-env_path = Path(__file__).parent.parent.parent.parent / ".env.mobile"
-load_dotenv(env_path)
+#env_path = Path(__file__).parent.parent.parent.parent / ".env.mobile"
+#load_dotenv(env_path)
 
-load_dotenv() # Загружаем переменные из .env
+load_dotenv(os.path.join(ROOT, ".env.mobile")) # Загружаем переменные из .env
 
 #appium_url = os.getenv("MOBILE_URL")
 #apk_name = os.getenv("APP")

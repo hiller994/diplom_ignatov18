@@ -5,11 +5,11 @@ from pathlib import Path
 import requests
 from dotenv import load_dotenv
 
-from constants import ROOT
+from path_env import ROOT
 
 # Путь к .env.mobile относительно conftest.py
-env_path = Path(__file__).parent.parent.parent.parent / ".env.allure_server"
-load_dotenv(env_path)
+#env_path = Path(__file__).parent.parent.parent.parent / ".env.allure_server"
+load_dotenv(os.path.join(ROOT, ".env.allure_server"))
 #load_dotenv(".env.allure_server")
 
 allure_login = os.getenv('ALLURE_LOGIN')
@@ -50,7 +50,7 @@ def post_allure_server_results():
     )
 
 
-    # ---------------------- Подготовка файлов
+    # Подготовка файлов
     results_dir = os.path.join(ROOT, "allure-results")
     file_paths = [
         os.path.join(results_dir, f)
@@ -66,6 +66,7 @@ def post_allure_server_results():
             f = open(path, 'rb')
             files.append(('files[]', (file_name, f)))
 
+        # Отправка результатов на сервер
         response_post = session.post(
             url=allure_url_swagger + '/send-results',
             params={
@@ -82,6 +83,7 @@ def post_allure_server_results():
         #print(f"Send results status: {response_post.status_code}")
         #print("Response:", response_post.text)
 
+        # генерация результата на сервере
         response_generate_report = session.get(
             url=allure_url_swagger + '/generate-report?project_id=b2b-lk-ui&execution_name=Allure%20Docker%20Service%20UI'
         )

@@ -69,6 +69,66 @@ ___
 
 ___
 
+## Запуск автотестов
+### Локально
+
+* В проекте создать: 
+файл .env c данными
+```
+WEB_LOGIN = "xxx"
+WEB_PASS = "xxx"
+SWAGGER_URL = "xxx"
+WEB_URL = "xxx"
+ID_COMPANY = "xxx"
+ID_CONTRACT = "xxx"
+ID_CARD = "xxx"
+ID_DRIVER_FOR_CARD = "xxx"
+ID_TRANSPORT_FOR_CARD = "xxx"
+SELENOID_URL = "xxx"
+```
+файл .env.allure_server c данными
+```
+ALLURE_LOGIN = "xxx"
+ALLURE_PASS = "xxx"
+ALLURE_URL_WEB = "xxx"
+ALLURE_URL_SWAGGER = "xxx"
+ALLURE_ID_PROJECT = "xxx"
+```
+файл .env.mobile c данными
+```
+MOBILE_URL = "***"
+APP = ***.apk
+DEVICE_NAME = "***"
+```
+
+* Запустить команду для установки библиотек
+```
+Pip install –r requirements.txt
+```
+* Установить интерпритатор (через консоль или pycharm)
+```
+python -m venv .venv
+source .venv/bin/activate
+```
+* Запуск теста:
+website
+```
+pytest tests/website/ui_tests
+```
+api
+```
+pytest tests/website/api_tests
+```
+mobile
+```
+pytest tests/mobile/mobile_tests
+```
+
+* Вывод результатов на allure сервере
+```
+http://***/allure-docker-service-ui/projects/***
+```
+
 ## Пример Allure-отчета (Web)
 
 ![This is an image](media_conten/picture/allure_web.jpg)
