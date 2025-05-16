@@ -5,6 +5,8 @@ from selene.support.shared import browser
 from dotenv import load_dotenv
 import os
 
+from tests.website.ui_tests.allure_server import post_allure_server_results
+
 load_dotenv()
 
 web_login = os.getenv("WEB_LOGIN")
@@ -31,3 +33,5 @@ def auth():
         token = data_token['access_token']
 
     yield token
+
+    post_allure_server_results()  # отправка отчета на сервер

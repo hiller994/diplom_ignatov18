@@ -111,6 +111,7 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 * Запуск теста:
+
 website
 ```
 pytest tests/website/ui_tests
@@ -137,6 +138,13 @@ http://***/allure-docker-service-ui/projects/***
 video
 
 ___
+
+## Пример Allure-отчета (Api)
+
+![This is an image](media_conten/picture/allure-api.jpg)
+
+___
+
 ## Пример Allure-отчета (Mobile)
 
 ![This is an image](media_conten/picture/allure_mobile.jpg)

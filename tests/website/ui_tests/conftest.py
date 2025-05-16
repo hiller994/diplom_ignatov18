@@ -6,6 +6,8 @@ import requests
 from selene.support.shared import browser
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from telegram import Bot
+from telegram.error import TelegramError
 
 from tests.website.ui_tests.allure_server import post_allure_server_results
 #from tests.website.ui_tests.allure_server import post_allure_server_results
@@ -21,6 +23,7 @@ load_dotenv()
 #   load_dotenv()
 
 #DEFAULT_BROWSER_VERSION = "128.0"
+
 
 web_login = os.getenv("WEB_LOGIN")
 web_pass = os.getenv("WEB_PASS")
