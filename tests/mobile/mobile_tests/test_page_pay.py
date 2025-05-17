@@ -28,7 +28,7 @@ def test_page_pay(mobile_management):
                              '//*[@resource-id="ru.tatneft.driver.stage:id/primary" and @text="ДТ ТАНЕКО"]')).click()
         with allure.step('Выбор колонки'):
             browser.element((AppiumBy.XPATH,
-                             '//*[@resource-id="ru.tatneft.driver.stage:id/primary" and @text="7"]')).click()
+                             '//*[@resource-id="ru.tatneft.driver.stage:id/primary" and @text="6"]')).click()
         with allure.step('Ввод объема'):
             browser.element((AppiumBy.ID, "ru.tatneft.driver.stage:id/editText")).type('3')
             browser.element((AppiumBy.ID, "ru.tatneft.driver.stage:id/continue_button")).click()
@@ -42,5 +42,5 @@ def test_page_pay(mobile_management):
                              '//*[@resource-id="ru.tatneft.driver.stage:id/primary" and @text="0728"]')).should(
                 be.visible)
             browser.element((AppiumBy.XPATH,
-                             '//*[@resource-id="ru.tatneft.driver.stage:id/primary" and @text="7"]')).should(
+                             '//*[@resource-id="ru.tatneft.driver.stage:id/primary" and @text="6"]')).should(
                 be.visible)

@@ -1,12 +1,16 @@
+import subprocess
 from pathlib import Path
 
 import pytest
+from appium import webdriver
+from appium.webdriver.webdriver import WebDriver as AppiumDriver
 from appium.options.android import UiAutomator2Options
 from dotenv import load_dotenv
 from selene import browser, Config
 import os
 
 from path_env import ROOT
+from utils.allure_server import post_allure_server_results
 from utils.attach import attach_screenshot
 
 
@@ -50,12 +54,27 @@ def mobile_management():
     #browser.config.driver = webdriver.Remote(
     #    command_executor='http://127.0.0.1:4723',
     #   options=options
-    browser.config.driver_remote_url = os.getenv("MOBILE_URL")
-    browser.config.driver_options = options
 
 
+    #browser.config.driver_remote_url = os.getenv("MOBILE_URL")
+    #browser.config.driver_options = options
+    '''
+    # Явно создаем драйвер и передаем его Selene
+    driver = webdriver.Remote(
+        command_executor=os.getenv("MOBILE_URL"),
+        options=options
+    )
+    browser.config.driver = driver  # Важно: присваиваем драйвер напрямую
+    '''
+    # Явно создаем драйвер и передаем его Selene
+    driver = webdriver.Remote(
+        command_executor=os.getenv("MOBILE_URL"),
+        options=options
+    )
+    browser.config.driver = driver  # Важно: присваиваем драйвер напрямую
 
     yield
 
     attach_screenshot(browser)
-    browser.quit()
+    post_allure_server_results()
+    driver.quit()  # Закрываем драйвер явно (не через browser.quit())
