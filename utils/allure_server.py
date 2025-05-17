@@ -95,13 +95,13 @@ def post_allure_server_results():
     #print("Responce clean history: ", response_clean_history.text)
     #print("Responce clean results: ", response_clean_results.text)
 
-    print("Status code login:", response_login.status_code)
+    #print("Status code login:", response_login.status_code)
     #print("Status code clean history: ", response_clean_history.status_code)
     #print("Status code clean results: ", response_clean_results.status_code)
-    print("Status code post file:", response_post.status_code)
-    print("Status code generate report:", response_generate_report.status_code)
-    print("Response post file:", response_post.text)
-    print("Responce generate: ", response_generate_report.text)
+    #print("Status code post file:", response_post.status_code)
+    #print("Status code generate report:", response_generate_report.status_code)
+    #print("Response post file:", response_post.text)
+    #print("Responce generate: ", response_generate_report.text)
 
     '''
     # Путь к файлу с результатами

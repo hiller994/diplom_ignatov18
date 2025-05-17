@@ -7,7 +7,7 @@ from tests.website.ui_tests.conftest import swagger_url, id_card
 class CardlimitPage:
     @allure.step('Открытие формы создания лимита')
     def open_page(self):
-        browser.open(f"cards/{id_card}?tab=1")
+        browser.open(f"cards/{id_card}?tab=1&cardId={id_card}&fromDate=2025-05-10T00:00:00.000&endDate=2025-05-17T23:59:59.999&page=1")
         browser.element('[class="btn btn--fit btn--green"]').click()
 
     @allure.step('Выбор категории/группы/товара')

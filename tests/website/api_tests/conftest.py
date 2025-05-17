@@ -1,11 +1,10 @@
 import allure
 import pytest
 import requests
-from selene.support.shared import browser
 from dotenv import load_dotenv
 import os
 
-from tests.website.ui_tests.allure_server import post_allure_server_results
+from utils.allure_server import post_allure_server_results
 
 load_dotenv()
 
@@ -18,6 +17,7 @@ id_card = os.getenv("ID_CARD")
 id_contract = os.getenv("ID_CONTRACT")
 id_driver = os.getenv("ID_DRIVER_FOR_CARD")
 id_transport = os.getenv("ID_TRANSPORT_FOR_CARD")
+
 
 
 @pytest.fixture(scope='function')
@@ -34,4 +34,5 @@ def auth():
 
     yield token
 
+    #attach_logging()
     post_allure_server_results()  # отправка отчета на сервер

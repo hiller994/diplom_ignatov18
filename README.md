@@ -2,7 +2,6 @@
 [Ссылка на сайт "Топливные карты АЗС для бизнеса"](https://lk.gsb.tatneft.ru/promo/)
 
 ![This is an image](media_conten/picture/main_page.jpg)
-![This is an image](media_conten/picture/main_page2.jpg)
 ![This is an image](media_conten/picture/main_page3.jpg)
 ___
 

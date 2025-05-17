@@ -10,7 +10,6 @@ def attach_logging(request_variable):
 
 # Получаем чистый путь
         full_url = request_variable.request.url
-        # clean_path = urlparse(full_url).path.lstrip('/')
 
         logging.info(urlparse(full_url).path.lstrip('/'))
         logging.info(request_variable.status_code)

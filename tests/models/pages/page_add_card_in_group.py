@@ -12,29 +12,36 @@ class AddcardgroupPage:
         self.id_group = None
         self.auth_data = None
 
-
     @allure.step('Создание группы')
     def create_group(self):
-        auth_data = browser.execute_script('''
-                                    return {
-                                        auth: JSON.parse(localStorage.getItem(".tn_gsb.tn_auth")),
-                                        user: JSON.parse(localStorage.getItem(".tn_gsb.tn_user"))
-                                    };
-                                ''')
+        self.auth_data = browser.execute_script('''
+                                return {
+                                    auth: JSON.parse(localStorage.getItem(".tn_gsb.tn_auth")),
+                                    user: JSON.parse(localStorage.getItem(".tn_gsb.tn_user"))
+                                };
+                            ''')
         create_card_group = requests.post(url=swagger_url + f'contracts/{id_contract}/card-groups/', headers=
         {
-            "Authorization": f"Bearer {auth_data['auth']['accessToken']}",
+            "Authorization": f"Bearer {self.auth_data['auth']['accessToken']}",
             "Content-Type": "application/json"
         },
-                                    json={
-                                        "name": "Тестовая группа селен12",
-                                        "comment": "Создание группы через автотест1"
-                                    })
+                                          json={
+                                              "name": "Тестовая группа селен12",
+                                              "comment": "Создание группы через автотест1"
+                                          })
+
+        # Проверяем статус ответа
+        #if create_card_group.status_code != 200:
+        #    raise Exception(
+        #        f"Ошибка создания группы! Статус: {create_card_group.status_code}, Ответ: {create_card_group.text}")
 
         data_card_group = create_card_group.json()
-        id_group = data_card_group['id']
-        #print(id_group)
-        print(data_card_group)
+        #self.id_group = data_card_group.get('id')  # Используем .get(), чтобы избежать KeyError
+        self.id_group = data_card_group['id']
+
+        #if not self.id_group:
+        #    raise Exception("API не вернул ID группы!")
+
         return self.auth_data, self.id_group
 
     @allure.step('Открытие формы создания лимита')

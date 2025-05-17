@@ -3,13 +3,11 @@ import json
 import allure
 import pytest
 import requests
+from selene import Config
 from selene.support.shared import browser
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from telegram import Bot
-from telegram.error import TelegramError
 
-from tests.website.ui_tests.allure_server import post_allure_server_results
 #from tests.website.ui_tests.allure_server import post_allure_server_results
 from utils import attach
 from dotenv import load_dotenv
@@ -86,6 +84,7 @@ def auth():
 
 @pytest.fixture(scope="function", autouse=True)
 def setup_browser(request):
+    Config.timeout = 15
     #browser_version = request.config.getoption("--browser_version")
     #browser_version = (
     #    browser_version if browser_version != "" else DEFAULT_BROWSER_VERSION
@@ -121,7 +120,7 @@ def setup_browser(request):
     attach.add_screenshot(browser)
     attach.add_logs(browser)
     attach.add_video(browser)
-    post_allure_server_results() # отправка отчета на сервер
+    #post_allure_server_results() # отправка отчета на сервер
 
 
     #client = AllureServerClient()
