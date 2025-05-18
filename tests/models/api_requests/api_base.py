@@ -1,7 +1,7 @@
 import requests
 from utils.attach_logging_api import attach_logging
 
-#Вынес общую логику в базовый класс и затем наследуюсь от него в других тестах
+#Вынес общую логику в базовый класс и затем наследуюсь от него в других тестах апи
 class ApiBase:
     def __init__(self, auth_token, base_url):
         self.auth_token = auth_token
