@@ -1,4 +1,4 @@
-from tests.models.pages.page_create_group_card import GroupcardPage
+from tests.models.ui_pages.page_create_group_card import GroupcardPage
 
 def test_create_group_card(auth):
     page_group = GroupcardPage()

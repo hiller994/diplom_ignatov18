@@ -1,4 +1,4 @@
-from tests.models.pages.page_create_limit_card import CardlimitPage
+from tests.models.ui_pages.page_create_limit_card import CardlimitPage
 
 def test_create_card_limit(auth):
     page_limit = CardlimitPage()

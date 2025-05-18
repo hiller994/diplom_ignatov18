@@ -1,4 +1,4 @@
-from tests.models.pages.page_userinfo import UserinfoPage
+from tests.models.ui_pages.page_userinfo import UserinfoPage
 
 def test_auth(auth):
     page_lk = UserinfoPage()

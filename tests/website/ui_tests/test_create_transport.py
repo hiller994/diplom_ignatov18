@@ -1,4 +1,4 @@
-from tests.models.pages.page_create_transport import TransportPage
+from tests.models.ui_pages.page_create_transport import TransportPage
 
 def test_create_transport(auth):
     page_ts = TransportPage()

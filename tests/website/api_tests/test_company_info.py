@@ -1,13 +1,32 @@
+#import json
 import json
 
 import allure
-import requests
+#import requests
 from jsonschema import validate
-from tests.website.api_tests.conftest import swagger_url
-from utils.attach_logging_api import attach_logging
+
+from tests.models.api_requests.requests_company_info import TestCompanyInfo
+from tests.website.ui_tests.conftest import swagger_url
 from utils.file_path import path
 
 
+#from tests.website.api_tests.conftest import swagger_url
+#from utils.attach_logging_api import attach_logging
+#from utils.file_path import path
+
+def test_delete_driver_card(auth):
+    company_ops = TestCompanyInfo(auth, swagger_url)
+
+    with allure.step("Запрос информации о компании"):
+        add_response = company_ops.get_company_info()
+        assert add_response.status_code == 200
+
+    with allure.step("Проверка схемы json"):
+        schema_path = path("get_company.json")
+        with open(schema_path) as file:
+            validate(add_response, schema=json.loads(file.read()))
+
+'''
 def test_get_company_info(auth):
     with allure.step("Отправка запроса"):
         get_company_info = requests.get(url=swagger_url + f'companies/',
@@ -28,3 +47,4 @@ def test_get_company_info(auth):
 
     with allure.step("Сбор логов"):
         attach_logging(get_company_info)
+'''
