@@ -11,7 +11,7 @@ import os
 
 from path_env import ROOT
 from utils.allure_server import post_allure_server_results
-from utils.attach import attach_screenshot
+from utils.attach_web import attach_screenshot
 
 
 # Путь к .env.mobile относительно conftest.py

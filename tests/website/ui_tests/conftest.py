@@ -9,7 +9,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 #from tests.website.ui_tests.allure_server import post_allure_server_results
-from utils import attach
+from utils import attach_web
 from dotenv import load_dotenv
 import os
 #from project_root import get_project_root #библиотека для удобного поиска, чтобы при указани .env не писать parent.parent.parent.
