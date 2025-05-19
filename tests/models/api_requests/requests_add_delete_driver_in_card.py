@@ -9,7 +9,7 @@ from utils.attach_logging_api import attach_logging
 class TestDriverCardOperations(ApiBase):
     def add_driver_to_card(self):
         """Привязка водителя к топливной карте"""
-        endpoint = f'{self.base_url}companies/{id_company}/drivers/{id_driver}/cards/'
+        endpoint = f'companies/{id_company}/drivers/{id_driver}/cards/'
         payload = {"card_ids": [id_card]}
 
         return self._make_request(
@@ -20,7 +20,7 @@ class TestDriverCardOperations(ApiBase):
 
     def remove_driver_from_card(self):
         """Отвязка водителя от топливной карты"""
-        endpoint = f'{self.base_url}companies/{id_company}/drivers/{id_driver}/cards/{id_card}/'
+        endpoint = f'companies/{id_company}/drivers/{id_driver}/cards/{id_card}/'
 
         return self._make_request(
             method="DELETE",

@@ -6,7 +6,7 @@ from utils.attach_logging_api import attach_logging
 class TestContractInfo(ApiBase):
     def get_contract_info(self):
         """Получение информации о контракте"""
-        endpoint = f'{self.base_url}contracts/{id_contract}'
+        endpoint = f'contracts/{id_contract}'
 
         return self._make_request(
             method="GET",

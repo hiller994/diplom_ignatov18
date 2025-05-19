@@ -8,7 +8,7 @@ from utils.attach_logging_api import attach_logging
 class TestCompanyInfo(ApiBase):
     def get_company_info(self):
         """Получение информации о компании"""
-        endpoint = f'{self.base_url}companies/'
+        endpoint = 'companies/'
 
         return self._make_request(
             method="GET",

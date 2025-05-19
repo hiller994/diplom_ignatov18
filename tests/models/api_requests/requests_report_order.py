@@ -8,7 +8,7 @@ date_from, date_to = generate_date()
 class TestReportOrder(ApiBase):
     def report_order(self):
         """Фомирование отчета по транзакциям"""
-        endpoint = f'{self.base_url}companies/{id_company}/contracts/{id_contract}/reports/'
+        endpoint = f'companies/{id_company}/contracts/{id_contract}/reports/'
         payload = {
                                               "format": "PDF",
                                               "date_from": date_from,

@@ -6,6 +6,7 @@ import allure
 from jsonschema import validate
 
 from tests.models.api_requests.requests_company_info import TestCompanyInfo
+from tests.website.data.should_json_schema import should_json
 from tests.website.ui_tests.conftest import swagger_url
 from utils.file_path import path
 
@@ -22,9 +23,11 @@ def test_delete_driver_card(auth):
         assert add_response.status_code == 200
 
     with allure.step("Проверка схемы json"):
-        schema_path = path("get_company.json")
-        with open(schema_path) as file:
-            validate(add_response, schema=json.loads(file.read()))
+        should_json(add_response, "get_company.json")
+        #response_json = add_response.json()
+        #schema_path = path("get_company.json")
+        #with open(schema_path) as file:
+        #    validate(response_json, schema=json.loads(file.read()))
 
 '''
 def test_get_company_info(auth):

@@ -6,6 +6,7 @@ from jsonschema import validate
 
 from tests.models.api_requests.requests_contract_info import TestContractInfo
 from tests.website.api_tests.conftest import swagger_url, id_contract
+from tests.website.data.should_json_schema import should_json
 from utils.attach_logging_api import attach_logging
 from utils.file_path import path
 
@@ -17,9 +18,12 @@ def test_get_contract_info(auth):
         assert add_response.status_code == 200
 
     with allure.step('Проверка схемы json'):
-        schema_path = path("get_contract.json")
-        with open(schema_path) as file:
-            validate(add_response, schema=json.loads(file.read()))
+        should_json(add_response, "get_contract.json")
+
+        #response_json = add_response.json()
+        #schema_path = path("get_contract.json")
+        #with open(schema_path) as file:
+        #    validate(response_json, schema=json.loads(file.read()))
 '''
 def test_get_contract_info(auth):
     with allure.step('Отправка запроса'):
