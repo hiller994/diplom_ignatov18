@@ -6,8 +6,8 @@ def test_add_card_in_group(auth):
 
     page_group.create_group()
     page_group.open_page()
-    page_group.add_card_in_group('********00010785')
+    page_group.add_card_in_group('7013420000010785')
     page_group.save_card_in_group()
-    page_group.should_card_in_group('*** **** 0001 0785')
+    page_group.should_card_in_group('7013 4200 0001 0785')
     page_group.delete_group()
 

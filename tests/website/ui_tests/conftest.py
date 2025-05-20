@@ -12,6 +12,9 @@ from selenium.webdriver.chrome.options import Options
 from utils import attach_web
 from dotenv import load_dotenv
 import os
+
+from utils.allure_server import post_allure_server_results
+
 #from project_root import get_project_root #библиотека для удобного поиска, чтобы при указани .env не писать parent.parent.parent.
 
 load_dotenv()
@@ -116,11 +119,11 @@ def setup_browser(request):
     #browser.config.driver = driver
 
     yield
-    attach.add_html(browser)
-    attach.add_screenshot(browser)
-    attach.add_logs(browser)
-    attach.add_video(browser)
-    #post_allure_server_results() # отправка отчета на сервер
+    attach_web.add_html(browser)
+    attach_web.add_screenshot(browser)
+    attach_web.add_logs(browser)
+    attach_web.add_video(browser)
+    post_allure_server_results() # отправка отчета на сервер
 
 
     #client = AllureServerClient()

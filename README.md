@@ -68,8 +68,8 @@ ___
 
 ___
 
-## Запуск автотестов
-### Локально
+## Запуск автотестов (WEB/API/MOBILE)
+### Локально (web/api)
 
 * В проекте создать: 
 
@@ -130,12 +130,22 @@ pytest tests/mobile/mobile_tests
 http://***/allure-docker-service-ui/projects/***
 ```
 
+### Локально (mobile)
+
+* Установить appium, node.js, android studio
+* В android studio создать эмулятор android
+* перед запуском тестов в консоли запустить applium и запустить эмулятор в android studio
+```
+applium
+```
+* запуск тестов
+```
+pytest tests/mobile/mobile_tests
+```
+
 ## Пример Allure-отчета (Web)
 
 ![This is an image](media_conten/picture/allure_web.jpg)
-
-### Запись прохождения (Web):
-video
 
 ___
 
@@ -148,9 +158,6 @@ ___
 ## Пример Allure-отчета (Mobile)
 
 ![This is an image](media_conten/picture/allure_mobile.jpg)
-
-### Запись прохождения (Mobile):
-video
 ___
 
 ## Оповещения в Telegram

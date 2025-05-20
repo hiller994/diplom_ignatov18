@@ -2,6 +2,7 @@ tests/mobile/mobile_tests/driver-google-staging-38(1.1).apk
 .env.mobile
 .env
 .env.allure_server
+.env.data_for_tests
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
