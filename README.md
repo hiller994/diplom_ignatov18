@@ -151,14 +151,13 @@ ___
 
 ## Пример Allure-отчета (Api)
 
-![This is an image](media_conten/picture/allure-api.jpg)
+![This is an image](media_conten/picture/allure_api.jpg)
 
 ___
 
 ## Пример Allure-отчета (Mobile)
 
 ![This is an image](media_conten/picture/allure_mobile.jpg)
+Видео прохождение теста на мобильном устройстве
+![This is an image](media_conten/picture/mp.gif)
 ___
-
-## Оповещения в Telegram
-telegram
