@@ -30,18 +30,8 @@ class AddcardgroupPage:
                                               "comment": "Создание группы через автотест1"
                                           })
 
-        # Проверяем статус ответа
-        #if create_card_group.status_code != 200:
-        #    raise Exception(
-        #        f"Ошибка создания группы! Статус: {create_card_group.status_code}, Ответ: {create_card_group.text}")
-
         data_card_group = create_card_group.json()
-        #self.id_group = data_card_group.get('id')  # Используем .get(), чтобы избежать KeyError
         self.id_group = data_card_group['id']
-
-        #if not self.id_group:
-        #    raise Exception("API не вернул ID группы!")
-
         return self.auth_data, self.id_group
 
     @allure.step('Открытие формы создания лимита')

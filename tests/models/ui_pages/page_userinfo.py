@@ -1,5 +1,3 @@
-import os
-
 import allure
 import requests
 from selene import browser, have
@@ -10,7 +8,6 @@ from tests.website.ui_tests.conftest import swagger_url
 class UserinfoPage:
     def __init__(self):
         self.company_name = None
-        #self.company_address = None
 
     @allure.step('Открытие настроек личного кабинета')
     def open_page(self):
@@ -33,12 +30,10 @@ class UserinfoPage:
                 })
             data_userinfo = requests_userinfo.json()
 
-            #Доступ к элементам списка осуществляется по индексу, а не по ключу
+            #Доступ к элементам списка по индексу, а не по ключу
             self.company_name = data_userinfo['contracts'][0]['company']['name']
-            #company_address = data_userinfo['contracts'][0]['company']['address']
             return self.company_name
 
     @allure.step('Сравнение данных фронта и ответа с бэка')
     def should_data(self):
-        browser.element('.card__block').should(have.text(self.company_name)) #проверить, что текст просто содержится где-то внутри блока
-        #browser.element('.card__block').should(have.text(company_address))
+        browser.element('.card__block').should(have.text(self.company_name)) # проверить, что текст просто содержится где-то внутри блока

@@ -1,6 +1,5 @@
 from tests.models.api_requests.api_base import ApiBase
-from tests.website.api_tests.conftest import swagger_url, id_card, id_company, id_driver, id_transport, id_contract
-from utils.attach_logging_api import attach_logging
+from tests.website.api_tests.conftest import id_company, id_contract
 from utils.geterate_date import generate_date
 
 date_from, date_to = generate_date()

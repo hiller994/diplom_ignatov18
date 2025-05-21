@@ -65,9 +65,8 @@ class OperatorPage:
     })
         data_users = requests_users.json()
 
-        #print(data_users)
 
-        # 3. Ищем пользователя по ФИО
+        # Ищем пользователя по ФИО
         target_fio = value_fio  # ФИО, которое ищем
         user_id = None
 

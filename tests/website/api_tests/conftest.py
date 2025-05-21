@@ -4,7 +4,6 @@ import requests
 from dotenv import load_dotenv
 import os
 
-#from utils.allure_server import post_allure_server_results, AllureServer
 from utils.allure_server import post_allure_server_results
 
 load_dotenv()
@@ -30,10 +29,8 @@ def auth():
                                    "username" : web_login
                                })
         data_token = result_token.json()
-        #print(data_token)
         token = data_token['access_token']
 
     yield token
 
-    #attach_logging()
     post_allure_server_results()  # отправка отчета на сервер

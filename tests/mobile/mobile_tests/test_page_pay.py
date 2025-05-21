@@ -1,13 +1,9 @@
 import allure
 from appium.webdriver.common.appiumby import AppiumBy
-from selene import browser, be, have
+from selene import browser, be
 
 
 def test_page_pay(mobile_management):
-    #with allure.step('Переход на карту АЗС'):
-        #browser.element((AppiumBy.ID, "ru.tatneft.driver.stage:id/navigation_bar_item_small_label_view")).click()
-    #    browser.element((AppiumBy.XPATH,
-    #                     '//*[@resource-id="ru.tatneft.driver.stage:id/navigation_bar_item_large_label_view" and @text="Карта АЗС"]')).click()
     with allure.step('Поиск АЗС'):
         browser.element((AppiumBy.ID, "ru.tatneft.driver.stage:id/search_btn")).click()
         browser.element((AppiumBy.ID, "ru.tatneft.driver.stage:id/search")).type("28")

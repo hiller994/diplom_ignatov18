@@ -87,15 +87,13 @@ class CardlimitPage:
                 "Content-Type": "application/json"
             })
         data_card_limit = requests_card_limit.json()
-        #print(data_card_limit)
 
-        # Вариант 1: Простой перебор (если список небольшой)
+        # ищем айди лимита для удаления
         target_name = value_product # Аи-95 Бренд
         for item in data_card_limit:
             if item['title'] == target_name:
                 limit_id = item['id']
                 break
-        #print(limit_id)
 
         # Удаление транспорта
         delete_limit_card = requests.delete(url=swagger_url + f'cards/{id_card}/limits/{limit_id}',

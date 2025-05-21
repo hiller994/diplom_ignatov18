@@ -1,11 +1,10 @@
 import allure
 from appium.webdriver.common.appiumby import AppiumBy
-from selene import browser, be, have
+from selene import browser, be
 
 
 def test_user_info(mobile_management):
     with allure.step('Переход в настройки'):
-        #browser.element((AppiumBy.ID, "ru.tatneft.driver.stage:id/navigation_bar_item_small_label_view")).click()
         browser.element((AppiumBy.XPATH,
                          '//*[@resource-id="ru.tatneft.driver.stage:id/navigation_bar_item_small_label_view" and @text="Настройки"]')).click()
     with allure.step("Открытие формы с информацией о водителе"):

@@ -1,14 +1,8 @@
-import json
-
 import allure
-import requests
-from jsonschema import validate
-
 from tests.models.api_requests.requests_contract_info import TestContractInfo
-from tests.website.api_tests.conftest import swagger_url, id_contract
+from tests.website.api_tests.conftest import swagger_url
 from tests.website.data.should_json_schema import should_json
-from utils.attach_logging_api import attach_logging
-from utils.file_path import path
+
 
 def test_get_contract_info(auth):
     contract_ops = TestContractInfo(auth, swagger_url)
@@ -19,31 +13,3 @@ def test_get_contract_info(auth):
 
     with allure.step('Проверка схемы json'):
         should_json(add_response, "get_contract.json")
-
-        #response_json = add_response.json()
-        #schema_path = path("get_contract.json")
-        #with open(schema_path) as file:
-        #    validate(response_json, schema=json.loads(file.read()))
-'''
-def test_get_contract_info(auth):
-    with allure.step('Отправка запроса'):
-        get_contract_info = requests.get(url=swagger_url + f'contracts/{id_contract}',
-                                           headers=
-                                           {
-                                               "Authorization": f"Bearer {auth}",
-                                               "Content-Type": "application/json"
-                                           })
-        responce_contract_info = get_contract_info.json()
-        #print(responce_contract_info)
-
-    with allure.step('Проверка статус-кода'):
-        assert get_contract_info.status_code == 200
-
-    with allure.step('Проверка схемы json'):
-        schema_path = path("get_contract.json")
-        with open(schema_path) as file:
-            validate(responce_contract_info, schema=json.loads(file.read()))
-
-    with allure.step('Сбор логов'):
-        attach_logging(get_contract_info)
-'''
